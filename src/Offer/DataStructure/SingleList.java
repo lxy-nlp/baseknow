@@ -4,15 +4,18 @@ package Offer.DataStructure;
 import Offer.DataStructure.ListNode;
 import java.util.*;
 
+
+
+class Node{
+     int val;
+     Node next;
+
+    public Node(int val) { this.val = val; this.next = null;    }
+    public Node(int val,Node next) { this.val = val;this.next = next;   }
+}
 public class SingleList {
     private Node head;
-    class Node{
-        private int val;
-        private Node next;
 
-        public Node(int val) { this.val = val; this.next = null;    }
-        public Node(int val,Node next) { this.val = val;this.next = next;   }
-    }
     public SingleList(Node head){
         this.head = head;
     }
@@ -105,55 +108,6 @@ public class SingleList {
         }
         return q;
 
-    }
-
-    // 合并两个有序链表
-    public Node mergeTwoLists (Node l1, Node l2) {
-        // write code here
-        Node head = new Node(0);
-        Node tail = head;
-        while(l1 != null && l2 != null)
-        {
-            if(l1.val < l2.val)
-            {
-                tail.next = l1;
-                l1 = l1.next;
-            }else{
-                tail.next = l2;
-                l2 = l2.next;
-            }
-            tail = tail.next;
-        }
-
-        if(l1 != null)
-        {
-            tail.next = l1;
-        }
-
-        if(l2 != null)
-        {
-            tail.next = l2;
-        }
-        return head.next;
-    }
-
-    //合并有序链表的递归版本
-    public Node mergeCur(Node l1,Node l2)
-    {
-        if(l1 == null)
-            return l2;
-        if(l2 == null)
-            return l1;
-        if(l1.val < l2.val)
-        {
-            l1.next = mergeCur(l1.next,l2);
-            return l1;
-        }
-        else
-        {
-            l2.next = mergeCur(l1,l2.next);
-            return l2;
-        }
     }
 
     // 第一个公共节点的定义,两个或多个链表的交汇节点
@@ -352,12 +306,108 @@ public class SingleList {
 
     }
     // 尾插法
-    public static void reverseKgroups(SingleList l1,int k)
+    public static ListNode reverseKgroupsSelf(ListNode head,int k)
     {
+        if(head == null || head.next == null)
+            return head;
+        ListNode dummy = head;
+        ListNode tmphead = new ListNode(0);
+        ListNode tmp = tmphead;
+        Stack<ListNode> stack = new Stack();
+        while(dummy != null)
+        {
+            ListNode cur = dummy;
+            dummy = dummy.next;
+            cur.next = null;
+            stack.push(cur);
+            if(stack.size() == k)
+            {
+                while(!stack.isEmpty())
+                {
+                    tmp.next = stack.pop();
+                    tmp = tmp.next;
+                }
+            }
+        }
 
+
+        while(!stack.isEmpty())
+        {
+            ListNode t = stack.pop();
+            t.next = tmp.next;
+            tmp.next = t;
+        }
+        return tmphead.next;
     }
 
-    // 环形链表
+    // 判断环形链表
+    public static boolean isCircle(ListNode head)
+    {
+        ListNode slow = head, fast = head.next;
+        while(fast != null)
+        {
+            if(slow == fast)
+                return true;
+            if(fast.next == null)
+                return false;
+            fast = fast.next.next;
+            if(slow.next == null)
+                return false;
+            slow = slow.next;
+        }
+        return false;
+    }
+
+
+    // 合并两个有序链表
+    public static Node mergeTwoLists (Node l1, Node l2) {
+        // write code here
+        Node head = new Node(0);
+        Node tail = head;
+        while(l1 != null && l2 != null)
+        {
+            if(l1.val < l2.val)
+            {
+                tail.next = l1;
+                l1 = l1.next;
+            }else{
+                tail.next = l2;
+                l2 = l2.next;
+            }
+            tail = tail.next;
+        }
+
+        if(l1 != null)
+        {
+            tail.next = l1;
+        }
+
+        if(l2 != null)
+        {
+            tail.next = l2;
+        }
+        return head.next;
+    }
+
+    //合并有序链表的递归版本
+    public static Node mergeCur(Node l1,Node l2)
+    {
+        if(l1 == null)
+            return l2;
+        if(l2 == null)
+            return l1;
+        System.out.println("l1.val : "+l1.val + " l2.val : " + l2.val);
+        if(l1.val < l2.val)
+        {
+            l1.next = mergeCur(l1.next,l2);
+            return l1;
+        }
+        else
+        {
+            l2.next = mergeCur(l1,l2.next);
+            return l2;
+        }
+    }
 
     // 环形链表入口
 
@@ -370,14 +420,32 @@ public class SingleList {
         l1.insertAtTail(1);
         l1.insertAtTail(3);
         l1.insertAtTail(5);
-        SingleList l2 = new SingleList();
-        l2.insertAtTail(1);
-        l2.insertAtTail(2);
-        SingleList l3 = new SingleList();
-        Node head = l3.mergeTwoList(l1.head,l2.head);
-        System.out.print(head);
-        Node rehead = l1.reverseCur(l1.head);
-        System.out.print(rehead);
+        l1.insertAtTail(4);
+        l1.insertAtTail(6);
+        Node h1 = new Node(2);
+        h1.next = new Node(3);
+        h1.next.next = new Node(4);
+        h1.next.next.next = new Node(5);
+
+
+        Node h2 = new Node(1);
+        h2.next = new Node(3);
+        h2.next.next = new Node(6);
+        Node tt = mergeCur(h1,h2);
+        System.out.print(tt.val);
+
+
+
+//        ListNode tmp = reverseKgroupsSelf(h1,2);
+//        System.out.print(tmp);
+//        SingleList l2 = new SingleList();
+//        l2.insertAtTail(1);
+//        l2.insertAtTail(2);
+//        SingleList l3 = new SingleList();
+//        Node head = l3.mergeTwoList(l1.head,l2.head);
+//        System.out.print(head);
+//        Node rehead = l1.reverseCur(l1.head);
+//        System.out.print(rehead);
 
     }
 }

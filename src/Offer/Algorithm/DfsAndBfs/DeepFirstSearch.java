@@ -138,7 +138,8 @@ public class DeepFirstSearch {
 
     public static void main(String[] args)
     {
-
+        LinkedList<Integer> list = new LinkedList<>();
+        list.removeLast();
     }
 
 
