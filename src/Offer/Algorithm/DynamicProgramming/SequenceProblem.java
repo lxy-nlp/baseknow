@@ -2,32 +2,38 @@ package Offer.Algorithm.DynamicProgramming;
 
 import java.util.Arrays;
 
+/*
+* 子序列问题
+*
+* */
+
+
 public class SequenceProblem {
     public static void main(String[] args) {
 
     }
     //
-    public int lengthOfLIS(int[] nums)
-    {
-        int[] dp = new int[nums.length];
-        Arrays.fill(dp,1);
-        for(int i = 0; i < nums.length;i++)
-        {
-            for(int j = 0;j < i;j++)
-            {
-                if(nums[i] > nums[j])
-                    dp[i] = Math.max(dp[i],dp[j]+1);
-            }
-        }
-        int res = 0;
-        for(int k = 0;k < dp.length;k++)
-        {
-            res = Math.max(res,dp[k]);
-        }
-        return res;
-    }
+//    public int lengthOfLIS(int[] nums)
+//    {
+//        int[] dp = new int[nums.length];
+//        Arrays.fill(dp,1);
+//        for(int i = 0; i < nums.length;i++)
+//        {
+//            for(int j = 0;j < i;j++)
+//            {
+//                if(nums[i] > nums[j])
+//                    dp[i] = Math.max(dp[i],dp[j]+1);
+//            }
+//        }
+//        int res = 0;
+//        for(int k = 0;k < dp.length;k++)
+//        {
+//            res = Math.max(res,dp[k]);
+//        }
+//        return res;
+//    }
 
-    //
+    // 最长公共子串
     public static int LCS(String s1, String s2)
     {
         char[] as1 = s1.toCharArray();
@@ -49,7 +55,8 @@ public class SequenceProblem {
         }
         return dp[m][n];
     }
-    //
+
+    // 最长公共子序列
     public static int LCSS(String s1,String s2)
     {
         char[] as1 = s1.toCharArray();
@@ -67,5 +74,24 @@ public class SequenceProblem {
         }
         return res;
 
+    }
+
+    // 最长递增子序列
+    public static int lengthOfLIS(int[] nums)
+    {
+        int m = nums.length;
+        int[] dp = new int[m];
+        Arrays.fill(dp,1);
+        int res = 0;
+        for(int i = 1; i < m; i++)
+        {
+            for(int j = 0; j < i; j++)
+            {
+                if(nums[i] > nums[j])
+                    dp[i] = Math.max(dp[i],dp[j] + 1);
+            }
+            res = Math.max(dp[i],res);
+        }
+        return res;
     }
 }

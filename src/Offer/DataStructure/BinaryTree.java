@@ -15,6 +15,7 @@ class TreeNode{
     public TreeNode left;
     public TreeNode right;
     public TreeNode parent;
+
     public TreeNode(int val)
     {
         data = val;
@@ -25,6 +26,7 @@ class TreeNode{
 }
 
 public class BinaryTree {
+
     private TreeNode root;
     public BinaryTree(){root = null;}
 
@@ -185,7 +187,7 @@ public class BinaryTree {
 
 
     /*
-    * 搜索二叉树 -- 中序遍历
+    * 搜索二叉树
     * 性质 左子树的值比根节点小 右子树的值都比根节点大
     * 中序遍历 得出的结果是 单调不减 (如果没有重复的值话就是单调递增的)
     * */
@@ -213,7 +215,7 @@ public class BinaryTree {
 
     /*完全二叉树性质
     *只能在叶子节点那一层缺失右子树
-    *利用队列进行层次遍历 最终队列为空 则是完全二叉树
+    *
     * */
     // 判断是否完全二叉树
     public boolean isWhole(TreeNode root)
@@ -238,13 +240,8 @@ public class BinaryTree {
         return true;
     }
 
-    // 公共祖先
+    //公共祖先
     // 明确公共祖先的定义和条件
-    /*
-    * 1. 在左右子树中寻找需要匹配的节点
-    * 2. 如果左右子树都找到了 那么祖先就是当前的父亲的节点
-    * 3. 如果左边或右边其中之一找到了 但是又没有全部找到 那么找到的就是祖先节点
-    * */
     public TreeNode lowestCommonAncestor(TreeNode root,TreeNode p,TreeNode q)
     {
         if(root == null || root == q || root == p)
@@ -262,17 +259,6 @@ public class BinaryTree {
     }
 
     // 根据中序遍历和先序遍历 建立二叉树
-    public static void transition(TreeNode root)
-    {
-        // 搜索二叉树的中序遍历是非递减序列
-        if(root == null)
-            return;
-        transition(root.left);
-        System.out.println(root.data);
-        transition(root.right);
-        // System.out.println(root.data);
-    }
-
 
 
     // 树的子结构
@@ -327,4 +313,7 @@ public class BinaryTree {
             return false;
         return dfs(lf.left,rt.right) & dfs(lf.right,rt.left);
     }
+
+
+
 }

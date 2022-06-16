@@ -3,7 +3,10 @@ package Offer.DataStructure;
 public class ListNode {
     public ListNode next;
     public  int val;
-    public ListNode() { }
+
+
+    ListNode() {
+    }
 
     public ListNode(int val) {
         this.val = val;

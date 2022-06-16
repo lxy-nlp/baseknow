@@ -1,19 +1,11 @@
 package Offer.DataStructure;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArraySolution{
     public static void main(String[] args) {
-//        int[] nums = {3,2,4};
-//        int sum = 6;
-//        int[] res = twoSum(nums,sum);
-//        System.out.print(res);
-        int[][] nums = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
-        int[][] nums1 = {{1},{3}};
-        List<Integer> t = spiralOrder1(nums);
-//        boolean res = searchMatrix1(nums1,2);
-        System.out.print(t);
-
 
     }
     // 二分查找
@@ -109,7 +101,7 @@ public class ArraySolution{
      * 给出的数组为 {20, 70, 110, 150},目标值为90
      * 输出 index1=1, index2=2
      */
-    public int[] twoSum1 (int[] numbers, int target) {
+    public int[] twoSum (int[] numbers, int target) {
         // write code here
         int[] res = new int[2];
         for(int i = 0;i< numbers.length-1;i++)
@@ -301,129 +293,6 @@ public class ArraySolution{
         }
         return max;
     }
-    // 三数之和
-    public static List<List<Integer>> threeSum(int[] nums)
-    {
-        List<List<Integer>> ans = new LinkedList<>();
-        int len = nums.length;
-        if(nums == null || len < 3)
-            return ans;
-        Arrays.sort(nums);
-        for(int i = 0; i < len;i++)
-        {
-            if(nums[i] > 0) // i 是当前的起始位置
-                break;
-            if(i > 0 && nums[i] == nums[i-1]) continue; // 去重操作
-            int L = i+1;
-            int R = len - 1;
-            while(L < R)
-            {
-                int sum = nums[i] + nums[L] + nums[R];
-                if(sum == 0){
-                    ans.add(Arrays.asList(nums[i],nums[L],nums[R]));
-                    while(L < R && nums[L] == nums[L+1]) L++; // 去重操作
-                    while(L < R && nums[R] == nums[R-1]) R--; // 去重操作
-                    L++;
-                    R--;
-                }
-                else if(sum < 0)
-                    L++;
-                else
-                    R--;
-            }
-        }
-        return ans;
-    }
-
-    public static int[] twoSum(int[] nums, int target) {
-        int[] res = new int[2];
-        int len = nums.length;
-        for(int i = 0; i < len-1;i++)
-        {
-            int left = i+1;
-            while(left < len)
-            {
-                if(nums[i] + nums[left] == target)
-                {
-                    res[0] = i;
-                    res[1] = left;
-                    return res;
-                }
-                left++;
-            }
-        }
-        return res;
-    }
-
-    // 思路 确定行之后在确定列
-    public static boolean searchMatrix1(int[][] matrix, int target) {
-        int m = matrix.length -1, n = matrix[0].length -1;
-        int up = 0, bottom = m;
-        while(up < bottom)
-        {
-            int mid = (up+bottom+1) /2;
-            if(matrix[mid][0] > target)
-                bottom = mid-1;
-            else if(matrix[mid][0] <= target)
-            {
-                if(matrix[mid][n] >=target)
-                    break;
-                up = mid;
-            }
-        }
-        int left = 0, right = n;
-        while(left <= right)
-        {
-            int mid = (left + right) / 2;
-            if(matrix[up][mid] > target)
-                right = mid-1;
-            else if(matrix[up][mid] < target)
-                left = mid + 1;
-            else
-                return true;
-        }
-        return false;
-    }
-    public static List<Integer> spiralOrder1(int[][] matrix) {
-        int bottom = matrix.length-1, right = matrix[0].length-1, up = 0, left = 0;
-        List<Integer> res = new LinkedList();
-        while(left <= right && up <= bottom)
-        {
-            int l = left;
-            while(l <= right)
-            {
-                res.add(matrix[up][l]);
-                l++;
-            }
-            up++;
-            int u  = up;
-            while(u <=bottom)
-            {
-                res.add(matrix[u][right]);
-                u++;
-            }
-            right--;
-            int r = right;
-            while(r >= left)
-            {
-                res.add(matrix[bottom][r]);
-                r--;
-            }
-            bottom--;
-            int b = bottom;
-            while(b >=up)
-            {
-                res.add(matrix[b][left]);
-                b--;
-            }
-            left++;
-        }
-//        Queue<Integer> queue = new LinkedList<>();
-//        queue.;
-        return res;
-    }
-
-
-
+    // 二分查找
 
 }

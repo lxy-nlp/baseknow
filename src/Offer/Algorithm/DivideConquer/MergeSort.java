@@ -1,10 +1,10 @@
 package Offer.Algorithm.DivideConquer;
 
 public class MergeSort {
-    /*归并排序的本质是 通过多次 分割 然后合并 达到【排序的效果*/
+    /*归并排序的本质是 通过多次 分割 然后合并 达到排序的效果*/
     public static void mergesort(int[] arr)
     {
-        int[] tmp = new int[arr.length];
+        int[] tmp = new int[arr.length]; // 辅助数组
         sort(arr,0,arr.length-1,tmp);
     }
     public static void sort(int[] arr,int left,int right,int[] tmp)

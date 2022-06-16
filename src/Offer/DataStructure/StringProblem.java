@@ -1,8 +1,5 @@
 package Offer.DataStructure;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class StringProblem {
 
     // 回文子串
@@ -54,61 +51,16 @@ public class StringProblem {
     }
 
     // 替换空格
-//    public String altitude(String s)
-//    {
-//
-//    }
-
-    public static List<List<String>> res = new LinkedList<>();
-    public static LinkedList<String> tmp = new LinkedList<>();
-    String str;
-
-    // 分割回文子串
-    // 回溯
-    public List<List<String>> partition(String s)
+    public String altitude(String s)
     {
-        str = s;
-        char[] arr = s.toCharArray();
-        backward(arr,0);
-        return res;
-    }
-    public void backward(char[] arr, int index)
-    {
-        if(index >= arr.length)
-        {
-            res.add(new LinkedList<>(tmp));
-            return;
-        }
-        for(int i = index; i < arr.length; i++)
-        {
-            if(!isPalindrome(arr,index,i))
-                continue;
-            tmp.add(str.substring(index,i+1));
-            backward(arr,i+1);
-            tmp.removeLast();
-        }
-    }
-
-    public boolean isPalindrome(char[] arr, int left, int right)
-    {
-        while(left < right)
-        {
-            if(arr[left] != arr[right])
-                return false;
-            left++;
-            right--;
-        }
-        return true;
-
+        return "";
     }
 
 
     // 无重复最长子串
-//    public String noRepeatString(String s)
-//    {
-//
-//    }
-
-    //
+    public String noRepeatString(String s)
+    {
+        return "";
+    }
 
 }

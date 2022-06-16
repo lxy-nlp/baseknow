@@ -25,7 +25,7 @@ public class QuickSort {
     private static int partition(Comparable[] a,int lo, int hi)
     {
         int i = lo, j= hi+1;
-        Comparable v = a[lo]; // 将 v 也就是数组中的第一个元素作为 pivot
+        Comparable v = a[lo];
         while(true)
         {
             while(less(a[++i],v))
@@ -42,7 +42,7 @@ public class QuickSort {
                 break;
             exch(a,i,j);
         }
-        exch(a,j,lo);  // 将 pivot 放到最终的位置
+        exch(a,j,lo);
         return j;
     }
 }

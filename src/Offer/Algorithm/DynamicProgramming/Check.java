@@ -1,5 +1,11 @@
 package Offer.Algorithm.DynamicProgramming;
 
+// 背包问题
+/*
+* 0-1背包
+* 完全背包
+* 分割子集
+* */
 public class Check {
     // 找零钱问题
     /*
@@ -100,7 +106,9 @@ public class Check {
         }
         return dp[n-1][aim] != max ? dp[n-1][aim] : -1;
     }
-    // 空间优化
+
+
+    // 空间优化的解法
     public int minCoinUndeOptimize(int[] arr,int aim)
     {
         if(arr == null || arr.length == 0 || aim < 0)
@@ -129,6 +137,8 @@ public class Check {
         }
         return dp[aim] != max ? dp[aim] : -1;
     }
+
+
 
     // 找零钱的方法数
     /*
@@ -213,6 +223,9 @@ public class Check {
                     num += dp[i-1][j-arr[i]*k];
                 }
                 dp[i][j] = num;
+
+
+
             }
         }
         return dp[arr.length -1][aim];
